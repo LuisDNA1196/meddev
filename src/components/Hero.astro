@@ -1,0 +1,51 @@
+
+
+
+<figure id="inicio" class="relative w-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+    <a href="/">
+      <img class="w-full xl:h-80 h-64 object-cover rounded-lg object-bottom" src="../img/herosk.webp" alt="image description">
+    </a>
+    <div >
+    <figcaption class="absolute px-6 bottom-6 text-zinc-100 text-xl md:text-2xl lg:text-4xl drop-shadow-sm">
+        <span class="drop-shadow-xl ">Creamos</span> 
+        <div class="w-full h-full mt-4 mb-4">
+            <span id="typewriter" class="text-4xl md:text-4xl lg:text-6xl text-blue-600 bg-white rounded-lg drop-shadow-sm font-bold "></span>
+        </div> 
+        <span class="drop-shadow-xl ">enfocado al</span> </br>
+        <span>Sector Salud.</span>
+    </figcaption>
+  </div>
+  </figure>
+  
+
+<script>
+const words = ["Paginas Web.", "Marcas Digitales.", "Marketing médico."];
+let i = 0;
+let j = 0;
+let currentWord = "";
+let isDeleting = false;
+
+function type() {
+  currentWord = words[i];
+  if (isDeleting) {
+    document.getElementById("typewriter").textContent = currentWord.substring(0, j-1);
+    j--;
+    if (j == 0) {
+      isDeleting = false;
+      i++;
+      if (i == words.length) {
+        i = 0;
+      }
+    }
+  } else {
+    document.getElementById("typewriter").textContent = currentWord.substring(0, j+1);
+    j++;
+    if (j == currentWord.length) {
+      isDeleting = true;
+    }
+  }
+  setTimeout(type, 130);
+}
+
+type();
+</script>

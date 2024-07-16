@@ -1,0 +1,90 @@
+
+    <style>
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .modal-enter-active {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 1;
+            transform: scale(1);
+        }
+        .modal-leave {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .modal-leave-active {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+    <!-- Modal toggle -->
+    <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button">
+        Agendar Cita
+    </button>
+
+    <!-- Main modal -->
+    <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden fixed top-0 right-0 left-0 z-50  w-full h-full  justify-center items-center bg-gray-800 bg-opacity-75 transition-opacity duration-300">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div id="modalContent" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Agendar Cita Google Calendar
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div>
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0Pv6FRHcAAUhYBtkO0X90CeDzSBbeg1g90zVCPA17d-6VJ99HylLyeWUHAMlPRsREZJj_XpMiS?gv=true" width="100%" height="600"></iframe>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600 text-center">
+                    <button type="button" class="w-full py-2.5 px-5 ms-3 text-md font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" data-modal-hide="default-modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modalToggle = document.querySelector('[data-modal-toggle="default-modal"]');
+        const modalHideButtons = document.querySelectorAll('[data-modal-hide="default-modal"]');
+        const modal = document.getElementById('default-modal');
+        const modalContent = document.getElementById('modalContent');
+
+        const openModal = () => {
+            modal.classList.remove('hidden');
+            modalContent.classList.add('modal-enter');
+            setTimeout(() => {
+                modalContent.classList.remove('modal-enter');
+                modalContent.classList.add('modal-enter-active');
+            }, 10); // Small delay to trigger the CSS transition
+        };
+
+        const closeModal = () => {
+            modalContent.classList.add('modal-leave');
+            setTimeout(() => {
+                modalContent.classList.remove('modal-leave');
+                modalContent.classList.add('modal-leave-active');
+            }, 10);
+            setTimeout(() => {
+                modalContent.classList.remove('modal-leave-active');
+                modal.classList.add('hidden');
+            }, 300); // Duration of the transition
+        };
+
+        modalToggle.addEventListener('click', openModal);
+        modalHideButtons.forEach(button => {
+            button.addEventListener('click', closeModal);
+        });
+    </script>
+
